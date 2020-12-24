@@ -241,6 +241,8 @@ def main(_argv):
             bbox = track.to_tlbr()
             class_name = track.get_class()
 
+            print("bbox of {} : {} ".format(class_name,bbox))
+
         # draw bbox on screen
             color = colors[int(track.track_id) % len(colors)]
             color = [i * 255 for i in color]
