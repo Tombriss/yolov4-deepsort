@@ -253,7 +253,7 @@ def main(_argv):
             x_dist_center = (x_center_bbox-0.5)**2
 
             print("center bbox : {}".format(x_center_bbox))
-            print("distance center bbox : {}".format(x_dist_center))
+            print("distance center bbox : {}".format(4*x_dist_center))
 
 
         # draw bbox on screen
