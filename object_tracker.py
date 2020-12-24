@@ -249,6 +249,13 @@ def main(_argv):
                                ]
             print("normalized bbox of {} : {} ".format(class_name, normalized_bbox))
 
+            x_center_bbox = (normalized_bbox[0]+normalized_bbox[2])/2
+            x_dist_center = (x_center_bbox-0.5)**2
+
+            print("center bbox : {}".format(x_center_bbox))
+            print("distance center bbox : {}".format(x_dist_center))
+
+
         # draw bbox on screen
             color = colors[int(track.track_id) % len(colors)]
             color = [i * 255 for i in color]
