@@ -111,31 +111,25 @@ def main(_argv):
         image_data = frame
         print("size : ",frame_size)
 
-        if False:
+        if True:
 
-            print("frame shape :", frame.shape)
-            print("frame size :", frame_size)
             #image_data = cv2.resize(frame, (input_size, input_size))
             ratio = float(input_size)/max(frame_size)
             new_size = tuple([int(x*ratio) for x in frame_size])
-            print("new size :", new_size)
 
             # new_size should be in (width, height) format
             im = cv2.resize(frame, (new_size[1], new_size[0]))
 
-            # delta_w = input_size - new_size[1]
-            # delta_h = input_size - new_size[0]
-            # top, bottom = delta_h//2, delta_h-(delta_h//2)
-            # left, right = delta_w//2, delta_w-(delta_w//2)
+            delta_w = input_size - new_size[1]
+            delta_h = input_size - new_size[0]
+            top, bottom = delta_h//2, delta_h-(delta_h//2)
+            left, right = delta_w//2, delta_w-(delta_w//2)
 
-            # color = [0, 0, 0]
-            # image_data = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT,
-            #                                 value=color)
+            color = [0, 0, 0]
+            image_data = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT,
+                                            value=color)
 
             image_data = im
-
-            print("final shape :", image_data.shape)
-            print("final size :", image_data.shape[:2])
 
         image_data = cv2.resize(frame, (input_size, input_size))
         image_data = image_data / 255.
