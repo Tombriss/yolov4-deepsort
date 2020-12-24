@@ -109,7 +109,9 @@ def main(_argv):
         print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
         image_data = frame
-        if True:
+
+
+        if False:
 
             print("frame shape :", frame.shape)
             print("frame size :", frame_size)
@@ -135,6 +137,7 @@ def main(_argv):
             print("final shape :", image_data.shape)
             print("final size :", image_data.shape[:2])
 
+        image_data = cv2.resize(frame, (input_size, input_size))
         image_data = image_data / 255.
         image_data = image_data[np.newaxis, ...].astype(np.float32)
         start_time = time.time()
