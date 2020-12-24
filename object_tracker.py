@@ -219,7 +219,7 @@ def main(_argv):
                       score, class_name, feature in zip(bboxes, scores, names, features)]
 
         # initialize color map
-        cmap = plt.get_cmap('tab20b')
+        cmap = plt.get_cmap('RdYlGn')
         colors = [cmap(i)[:3] for i in np.linspace(0, 1, 20)]
 
         # run non-maxima supression
@@ -250,14 +250,16 @@ def main(_argv):
             print("normalized bbox of {} : {} ".format(class_name, normalized_bbox))
 
             x_center_bbox = (normalized_bbox[0]+normalized_bbox[2])/2
-            x_dist_center = (x_center_bbox-0.5)**2
+            x_dist_center = 4*(x_center_bbox-0.5)**2
 
             print("center bbox : {}".format(x_center_bbox))
-            print("distance center bbox : {}".format(4*x_dist_center))
+            print("distance center bbox : {}".format(x_dist_center))
 
 
         # draw bbox on screen
-            color = colors[int(track.track_id) % len(colors)]
+            #color = colors[int(track.track_id) % len(colors)]
+            color = colors[int((1-x_dist_center) * len(colors))]
+            print('ix color : {}'.format(int((1-x_dist_center) * len(colors))))
             color = [i * 255 for i in color]
             cv2.rectangle(frame, (int(bbox[0]), int(
                 bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
