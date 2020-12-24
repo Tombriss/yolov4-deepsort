@@ -258,7 +258,8 @@ def main(_argv):
 
         # draw bbox on screen
             #color = colors[int(track.track_id) % len(colors)]
-            enhanced_dist = min(2*x_dist_center,1)
+            enhanced_dist = min(3*x_dist_center-0.2,1)
+            enhanced_dist = max(enhanced_dist,0)
             ix = int((1-enhanced_dist) * len(colors))
             ix = min(ix,len(colors)-1)
             ix = max(ix,0)
