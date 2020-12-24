@@ -258,8 +258,14 @@ def main(_argv):
 
         # draw bbox on screen
             #color = colors[int(track.track_id) % len(colors)]
-            color = colors[int((1-x_dist_center) * len(colors))]
-            print('ix color : {}'.format(int((1-x_dist_center) * len(colors))))
+            
+            ix = int((1-2*x_dist_center) * len(colors))
+            ix = min(ix,len(colors)-1)
+            ix = max(ix,0)
+
+            color = colors[ix]
+            print("length colors : ",len(colors))
+            print('ix color : {}'.format(ix))
             color = [i * 255 for i in color]
             cv2.rectangle(frame, (int(bbox[0]), int(
                 bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
