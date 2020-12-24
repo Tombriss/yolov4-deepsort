@@ -109,6 +109,7 @@ def main(_argv):
         print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
         image_data = frame
+        print("size : ",frame_size)
 
         if False:
 
