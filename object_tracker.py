@@ -110,7 +110,6 @@ def main(_argv):
         frame_size = frame.shape[:2]
         image_data = frame
 
-
         if False:
 
             print("frame shape :", frame.shape)
@@ -156,10 +155,10 @@ def main(_argv):
                 boxes, pred_conf = filter_boxes(pred[0], pred[1], score_threshold=0.25,
                                                 input_shape=tf.constant([input_size, input_size]))
         else:
-            print("size before inference :",image_data.shape)
+            # print("size before inference :",image_data.shape)
             batch_data = tf.constant(image_data)
             pred_bbox = infer(batch_data)
-            print(pred_bbox)
+            # print(pred_bbox)
             for _, value in pred_bbox.items():
                 boxes = value[:, :, 0:4]
                 pred_conf = value[:, :, 4:]
