@@ -109,7 +109,7 @@ def main(_argv):
         print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
         image_data = frame
-        print("size : ",frame_size)
+        print("size : ", frame_size)
 
         if True:
 
@@ -241,7 +241,13 @@ def main(_argv):
             bbox = track.to_tlbr()
             class_name = track.get_class()
 
-            print("bbox of {} : {} ".format(class_name,bbox))
+            print("bbox of {} : {} ".format(class_name, bbox))
+            normalized_bbox = [bbox[0] / frame_size[1],
+                               bbox[1] / frame_size[0],
+                               bbox[2] / frame_size[1],
+                               bbox[3] / frame_size[0],
+                               ]
+            print("normalized bbox of {} : {} ".format(class_name, normalized_bbox))
 
         # draw bbox on screen
             color = colors[int(track.track_id) % len(colors)]
