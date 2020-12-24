@@ -13,7 +13,7 @@ from core.yolov4 import filter_boxes
 from tensorflow.python.saved_model import tag_constants
 from core.config import cfg
 from PIL import Image,ImageOps
-import cv2
+from cv2 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.compat.v1 import ConfigProto
@@ -103,9 +103,12 @@ def main(_argv):
         frame_num +=1
         print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
+        print("frame shape :",frame.shape)
+        print("frame size :",frame_size)
         #image_data = cv2.resize(frame, (input_size, input_size))
         ratio = float(input_size)/max(frame_size)
         new_size = tuple([int(x*ratio) for x in frame_size])
+        print("new size :",new_size)
 
         # new_size should be in (width, height) format
         im = cv2.resize(frame, (new_size[1], new_size[0])) 
@@ -118,6 +121,9 @@ def main(_argv):
         color = [0, 0, 0]
         image_data = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT,
             value=color)
+
+        print("final shape :",image_data.shape)
+        print("final size :",image_data.shape[:2])
 
         image_data = image_data / 255.
         image_data = image_data[np.newaxis, ...].astype(np.float32)
