@@ -109,7 +109,7 @@ def main(_argv):
         print('Frame #: ', frame_num)
         frame_size = frame.shape[:2]
         image_data = frame
-        if False:
+        if True:
 
             print("frame shape :", frame.shape)
             print("frame size :", frame_size)
@@ -121,14 +121,16 @@ def main(_argv):
             # new_size should be in (width, height) format
             im = cv2.resize(frame, (new_size[1], new_size[0]))
 
-            delta_w = input_size - new_size[1]
-            delta_h = input_size - new_size[0]
-            top, bottom = delta_h//2, delta_h-(delta_h//2)
-            left, right = delta_w//2, delta_w-(delta_w//2)
+            # delta_w = input_size - new_size[1]
+            # delta_h = input_size - new_size[0]
+            # top, bottom = delta_h//2, delta_h-(delta_h//2)
+            # left, right = delta_w//2, delta_w-(delta_w//2)
 
-            color = [0, 0, 0]
-            image_data = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT,
-                                            value=color)
+            # color = [0, 0, 0]
+            # image_data = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT,
+            #                                 value=color)
+
+            image_data = im
 
             print("final shape :", image_data.shape)
             print("final size :", image_data.shape[:2])
