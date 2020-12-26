@@ -274,7 +274,7 @@ def main(_argv):
                     int(x_center_bbox*frame_size[1]-pt_0_0[0]),
                     int(y_center_bbox*frame_size[0]-pt_0_0[1]),
                 )
-                norm = ( pt_center[0]**2 + pt_center[1]**2 )**0.5
+                norm = ( pt_center[0]**2 + pt_center[1]**2 )**0.5 / 100
                 
                 pt_arrow = (
                     pt_0_0[0] + int(pt_center[0]/norm),
