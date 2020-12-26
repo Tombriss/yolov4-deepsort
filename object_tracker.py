@@ -236,7 +236,7 @@ def main(_argv):
 
         # update tracks
         for track in tracker.tracks:
-            if not track.is_confirmed() or track.time_since_update > 100:
+            if not track.is_confirmed():  # or track.time_since_update > 1: (oublie l'objet sorti du cadre)
                 continue
             bbox = track.to_tlbr()
             class_name = track.get_class()
@@ -247,36 +247,46 @@ def main(_argv):
                                bbox[2] / frame_size[1],
                                bbox[3] / frame_size[0],
                                ]
-            print("normalized bbox of {} : {} ".format(class_name, normalized_bbox))
+            print("normalized bbox of {} : {} ".format(
+                class_name, normalized_bbox))
 
             x_center_bbox = (normalized_bbox[0] + normalized_bbox[2])/2
-            y_center_bbox = (normalized_bbox[1]+ normalized_bbox[3])/2
+            y_center_bbox = (normalized_bbox[1] + normalized_bbox[3])/2
             x_dist_center = abs(x_center_bbox - 0.5)
-            y_dist_center = abs(y_center_bbox - 0.5) 
+            y_dist_center = abs(y_center_bbox - 0.5)
 
             dist_center = (x_dist_center**2 + y_dist_center**2)**0.5
 
             print("distance center bbox : {}".format(dist_center))
-
+            print("center : {}".format(x_center_bbox, y_center_bbox))
 
         # draw bbox on screen
             #color = colors[int(track.track_id) % len(colors)]
-            enhanced_dist = min(3*dist_center-0.2,1)
-            enhanced_dist = max(enhanced_dist,0)
+            enhanced_dist = min(3*dist_center-0.2, 1)
+            enhanced_dist = max(enhanced_dist, 0)
             ix = int((1-enhanced_dist) * len(colors))
-            ix = min(ix,len(colors)-1)
-            ix = max(ix,0)
+            ix = min(ix, len(colors)-1)
+            ix = max(ix, 0)
 
-            color = colors[ix]
-            print("length colors : ",len(colors))
-            print('ix color : {}'.format(ix))
-            color = [i * 255 for i in color]
-            cv2.rectangle(frame, (int(bbox[0]), int(
-                bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
-            cv2.rectangle(frame, (int(bbox[0]), int(bbox[1]-30)), (int(bbox[0])+(
-                len(class_name)+len(str(track.track_id)))*17, int(bbox[1])), color, -1)
-            cv2.putText(frame, class_name + "-" + str(track.track_id),
-                        (int(bbox[0]), int(bbox[1]-10)), 0, 0.75, (255, 255, 255), 2)
+            if track.time_since_update > 1:
+                pt_0_0 = (int(0.5*frame_size[1]), int(0.5*frame_size[1]))
+                pt_center_bbox = (
+                    0.5*(pt_0_0[0]+int(x_center_bbox*frame_size[1])),
+                    0.5*(pt_0_0[1]+int(y_center_bbox*frame_size[1])),
+                                  )
+                print("sorti du cadre")
+                cv2.arrowedLine(frame, pt_0_0, pt_center_bbox)
+            else:
+                color = colors[ix]
+                print("length colors : ", len(colors))
+                print('ix color : {}'.format(ix))
+                color = [i * 255 for i in color]
+                cv2.rectangle(frame, (int(bbox[0]), int(
+                    bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
+                cv2.rectangle(frame, (int(bbox[0]), int(bbox[1]-30)), (int(bbox[0])+(
+                    len(class_name)+len(str(track.track_id)))*17, int(bbox[1])), color, -1)
+                cv2.putText(frame, class_name + "-" + str(track.track_id),
+                            (int(bbox[0]), int(bbox[1]-10)), 0, 0.75, (255, 255, 255), 2)
 
         # if enable info flag then print details about each track
             if FLAGS.info:
