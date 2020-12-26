@@ -254,7 +254,7 @@ def main(_argv):
             x_dist_center = abs(x_center_bbox - 0.5)
             y_dist_center = abs(y_center_bbox - 0.5) 
 
-            dist_center = x_dist_center + y_dist_center
+            dist_center = (x_dist_center**2 + y_dist_center**2)**0.5
 
             print("distance center bbox : {}".format(dist_center))
 
