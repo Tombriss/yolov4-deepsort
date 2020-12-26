@@ -249,16 +249,19 @@ def main(_argv):
                                ]
             print("normalized bbox of {} : {} ".format(class_name, normalized_bbox))
 
-            x_center_bbox = (normalized_bbox[0]+normalized_bbox[2])/2
-            x_dist_center = 2*abs(x_center_bbox-0.5)
+            x_center_bbox = (normalized_bbox[0] + normalized_bbox[2])/2
+            y_center_bbox = (normalized_bbox[1]+ normalized_bbox[3])/2
+            x_dist_center = abs(x_center_bbox - 0.5)
+            y_dist_center = abs(y_center_bbox - 0.5) 
 
-            print("center bbox : {}".format(x_center_bbox))
-            print("distance center bbox : {}".format(x_dist_center))
+            dist_center = x_dist_center + y_dist_center
+
+            print("distance center bbox : {}".format(dist_center))
 
 
         # draw bbox on screen
             #color = colors[int(track.track_id) % len(colors)]
-            enhanced_dist = min(3*x_dist_center-0.2,1)
+            enhanced_dist = min(3*dist_center-0.2,1)
             enhanced_dist = max(enhanced_dist,0)
             ix = int((1-enhanced_dist) * len(colors))
             ix = min(ix,len(colors)-1)
