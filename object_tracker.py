@@ -271,8 +271,8 @@ def main(_argv):
             if track.time_since_update > 1:
                 pt_0_0 = (int(0.5*frame_size[1]), int(0.5*frame_size[1]))
                 pt_arrow = (
-                    0.5*(pt_0_0[0]+int(x_center_bbox*frame_size[1])),
-                    0.5*(pt_0_0[1]+int(y_center_bbox*frame_size[1])),
+                    int(0.5*(pt_0_0[0]+x_center_bbox*frame_size[1])),
+                    int(0.5*(pt_0_0[1]+y_center_bbox*frame_size[1])),
                 )
                 print("sorti du cadre")
                 cv2.arrowedLine(frame, pt_0_0, pt_arrow,(255, 0, 0))
