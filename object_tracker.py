@@ -275,7 +275,7 @@ def main(_argv):
                     0.5*(pt_0_0[1]+int(y_center_bbox*frame_size[1])),
                 )
                 print("sorti du cadre")
-                cv2.arrowedLine(frame, pt_0_0, pt_arrow)
+                cv2.arrowedLine(frame, pt_0_0, pt_arrow,(255, 0, 0))
             else:
                 color = colors[ix]
                 print("length colors : ", len(colors))
