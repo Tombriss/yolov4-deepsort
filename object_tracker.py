@@ -274,14 +274,14 @@ def main(_argv):
                     int(x_center_bbox*frame_size[1]-pt_0_0[0]),
                     int(y_center_bbox*frame_size[0]-pt_0_0[1]),
                 )
-                norm = ( pt_center[0]**2 + pt_center[1]**2 )**0.5 / 100
+                norm = ( pt_center[0]**2 + pt_center[1]**2 )**0.5 / 200
                 
                 pt_arrow = (
                     pt_0_0[0] + int(pt_center[0]/norm),
                     pt_0_0[1] + int(pt_center[1]/norm),
                 )
                 print("sorti du cadre")
-                cv2.arrowedLine(frame, pt_0_0, pt_arrow,(255, 0, 0),4)
+                cv2.arrowedLine(frame, pt_0_0, pt_arrow,(255, 0, 0),3)
             else:
                 color = colors[ix]
                 print("length colors : ", len(colors))
